@@ -1,14 +1,8 @@
 """Streamlit app for Industrial Geosynthetics."""
 
 # To run: python -m streamlit run app.py
-# Import from standard library
 import logging
-import random
-import re
-
-# Import from 3rd party libraries
 import streamlit as st
-import streamlit.components.v1 as components
 from functions_openai import OpenAi
 import difflib
 import os

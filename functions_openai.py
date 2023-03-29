@@ -7,10 +7,8 @@ from llama_index import LLMPredictor, GPTSimpleVectorIndex, ServiceContext
 from langchain.chat_models import ChatOpenAI
 from llama_index.output_parsers import LangchainOutputParser
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
-from llama_index.output_parsers import LangchainOutputParser
 from llama_index.prompts.prompts import QuestionAnswerPrompt, RefinePrompt
 from llama_index.prompts.default_prompts import DEFAULT_TEXT_QA_PROMPT_TMPL, DEFAULT_REFINE_PROMPT_TMPL
-from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 
 openai.api_key = st.secrets['OPENAI_API_KEY']
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.5, model_name="gpt-4"))
