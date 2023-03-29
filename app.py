@@ -124,8 +124,8 @@ if start and project_input:
     if st.session_state.answer:
         print(st.session_state.answer)
         ids = string_contained(str(st.session_state.answer))
-        product_name = ids[0].split('Project: ')[-1]
-        project_name = ids[1].split('Product: ')[-1]
+        project_name = ids[0].split('Project: ')[-1]
+        product_name = ids[1].split('Product: ')[-1]
         print(product_name, project_name)
         answer = bold_product(str(st.session_state.answer), product_name, project_name)
         st.markdown(answer.split('Project: ')[0])
