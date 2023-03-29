@@ -106,7 +106,7 @@ if "n_requests" not in st.session_state:
     st.session_state.n_requests = 0
 
 # Render Streamlit page
-main_title = '<h1 style="text-align: center; color: #262730; font-size: 30px;"><strong>Your One stop Geosynthetic Shop<strong></h1>' 
+main_title = '<h1 style="text-align: center; color: #262730; font-size: 40px;"><strong>Your One stop Geosynthetic Shop<strong></h1>' 
 st.markdown(main_title, unsafe_allow_html=True)
 blue_header = '<p style="text-align: center; color:#14A0DF; font-size: 25px;"><strong>What project are you looking to undertake?<strong></p> <p style="text-align: center; color:#14A0DF; font-size: 20px;">Let our AI find the optimal geosynthetic product for you.</p>'
 st.markdown(blue_header, unsafe_allow_html=True)
