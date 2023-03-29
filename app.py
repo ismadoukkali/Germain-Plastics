@@ -21,7 +21,7 @@ def generate_text(prompt, col2_b):
        st.session_state.text_error = "Please enter a topic"
     
     
-    with st.spinner("This might take a couple minutes, fetching an answer..."):
+    with st.spinner("This might take a couple minutes, fetching the perfect match..."):
         open_ai_function = OpenAi()
         st.session_state.text_error = ""
         st.session_state.n_requests += 1
