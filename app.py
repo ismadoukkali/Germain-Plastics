@@ -8,7 +8,7 @@ import difflib
 import os
 from PIL import Image
 
-def generate_text(prompt):
+def generate_text(prompt, col2_b):
     if st.session_state.n_requests >= 5:
         st.session_state.text_error = "Too many requests. Please wait a few seconds before generating another answer."
         logging.info(f"Session request limit reached: {st.session_state.n_requests}")
@@ -20,8 +20,8 @@ def generate_text(prompt):
     if not prompt:
        st.session_state.text_error = "Please enter a topic"
     
-   
-    with st.spinner("This might take a couple minutes, fetching an answer..."):
+    
+    with col2_b.spinner("This might take a couple minutes, fetching an answer..."):
         open_ai_function = OpenAi()
         st.session_state.text_error = ""
         st.session_state.n_requests += 1
@@ -127,7 +127,7 @@ st.markdown(s, unsafe_allow_html=True)
 start = col2_a.button(label="Find my ideal product")
 
 if start and project_input:
-    generate_text(project_input)
+    generate_text(project_input, col2_b)
     text_spinner_placeholder = st.empty()
     if st.session_state.text_error:
         st.error(st.session_state.text_error)
