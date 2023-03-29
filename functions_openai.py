@@ -10,7 +10,7 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from llama_index.prompts.prompts import QuestionAnswerPrompt, RefinePrompt
 from llama_index.prompts.default_prompts import DEFAULT_TEXT_QA_PROMPT_TMPL, DEFAULT_REFINE_PROMPT_TMPL
 
-os.env['OPENAI_API_KEY'] = st.secrets['OPENAI']
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI']
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.5, model_name="gpt-4"))
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
 index = GPTSimpleVectorIndex.load_from_disk('index.json', service_context=service_context) 
