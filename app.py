@@ -81,11 +81,11 @@ if "n_requests" not in st.session_state:
     st.session_state.n_requests = 0
 
 # Render Streamlit page
-main_title = '<h1 style="text-align: center; color: #262730; font-size: 35px;"><strong>Your One stop Geosynthetic Shop<strong></h1>' 
+main_title = '<h1 style="text-align: center; color: #262730; font-size: 30px;"><strong>Your One stop Geosynthetic Shop<strong></h1>' 
 st.markdown(main_title, unsafe_allow_html=True)
-blue_header = '<p style="text-align: center; color:#14A0DF; font-size: 27px;"><strong>What project are you looking to undertake?<strong></p> <p style="text-align: center; color:#14A0DF; font-size: 20px;">Let our AI find the optimal geosynthetic product for you.</p>'
+blue_header = '<p style="text-align: center; color:#14A0DF; font-size: 25px;"><strong>What project are you looking to undertake?<strong></p> <p style="text-align: center; color:#14A0DF; font-size: 20px;">Let our AI find the optimal geosynthetic product for you.</p>'
 st.markdown(blue_header, unsafe_allow_html=True)
-blue_mini_header = '<p style="text-align: center; color:#14A0DF; font-size: 27px;"><strong>Let our AI find the optimal geosynthetic product for you.<strong></p>'
+blue_mini_header = '<p style="text-align: center; color:#14A0DF; font-size: 22px;"><strong>Let our AI find the optimal geosynthetic product for you.<strong></p>'
 
 buff1, col2_b, buff1 = st.columns([1,7,1])
 project_input = col2_b.text_input(label= "", placeholder="Type here... ex: 'I want to build a home koi pond, which product fits best?' ")
