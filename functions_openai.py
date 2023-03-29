@@ -29,8 +29,8 @@ QA_PROMPT_TMPL = (
     "\nBulleted list:"
     "- [Product specs]"
         
-    "\nProject: [project name]"
-    "\nProduct: [product name]'"
+    "\n**Project: [project name]**"
+    "\n**Product: [product name]**"
 
     "Always answer in the format given above and use the full name of the product, do the correct differentiation between the product selected and the rest."
     "Finally, if the answer is not contained in the context, answer the following: 'I am not able to give an anwer to this search query, check further information in our website https://geosyn.com.au/ - '.\n"

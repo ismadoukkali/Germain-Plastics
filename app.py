@@ -50,7 +50,7 @@ def find_most_similar_name(text, names):
     if text == 'Woven geotextile':
         most_similar_name = 'Product coming soon.....png'
         
-    if highest_score < 0.4:
+    if highest_score < 0.7:
         most_similar_name = 'Product coming soon.....png'
     return most_similar_name
 
@@ -70,6 +70,20 @@ def bold_product(text, product_name, project_name):
     text = text.replace('Specs:', "**Specs:**")
     text = text.replace(product_name, f"**{product_name}**")
     return text
+
+def string_contained(input_string):
+    output_strings = []
+
+    # Find all occurrences of "**" in the input string
+    occurrences = [i for i in range(len(input_string)) if input_string.startswith("**", i)]
+
+    # Extract the substrings between each pair of "**" occurrences
+    for i in range(0, len(occurrences), 2):
+        start_index = occurrences[i] + 2
+        end_index = occurrences[i+1]
+        output_strings.append(input_string[start_index:end_index])
+
+    return tuple(output_strings)
 
 st.set_page_config(page_title="Industrial Geosynthetics", page_icon="🤖")
 
@@ -109,8 +123,9 @@ if start and project_input:
 
     if st.session_state.answer:
         print(st.session_state.answer)
-        product_name = str(st.session_state.answer).split('Product: ')[-1]
-        project_name = str(st.session_state.answer).split('Project: ')[-1].split('Product: ')[0]
+        ids = string_contained(str(st.session_state.answer))
+        product_name = ids[0].split('Project: ')[-1]
+        project_name = ids[1].split('Product: ')[-1]
         print(product_name, project_name)
         answer = bold_product(str(st.session_state.answer), product_name, project_name)
         st.markdown(answer.split('Project: ')[0])
