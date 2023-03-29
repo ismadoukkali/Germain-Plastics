@@ -47,16 +47,20 @@ def find_most_similar_name(text, names):
         if score > highest_score:
             highest_score = score
             most_similar_name = name
-    if text == 'Woven geotextile':
+    if str.lower(text) == 'woven geotextile':
         most_similar_name = 'Product coming soon.....png'
+    elif str.lower(text) == 'non-woven geotextile':
+        most_similar_name = 'Non-Woven Geotextile.png'
 
-    if text == 'HDPE liner':
+    if str.lower(text) == str.lower('HDPE liner'):
         most_similar_name = 'HDPE liners (Geomembranes).png' 
-    elif text == 'HDPE Liner Lite/Pond Liner':
+    elif str.lower(text) == str.lower('HDPE Liner Lite/Pond Liner'):
         most_similar_name = 'HDPE Liner Lite Pond Liner.png'
-    elif text == 'HDPE Liner (Geomembranes)':
+    elif str.lower(text) == str.lower('HDPE Liner (Geomembranes)'):
         most_similar_name = 'HDPE liners (Geomembranes).png'
-
+    elif str.lower('LLDPE Liners') in str.lower(text):
+        most_similar_name = 'Product coming soon.....png'
+    
     if highest_score < 0.4:
         most_similar_name = 'Product coming soon.....png'
     return most_similar_name
