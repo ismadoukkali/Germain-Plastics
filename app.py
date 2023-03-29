@@ -50,7 +50,7 @@ def find_most_similar_name(text, names):
     if text == 'Woven geotextile':
         most_similar_name = 'Product coming soon.....png'
         
-    if highest_score < 0.5:
+    if highest_score < 0.4:
         most_similar_name = 'Product coming soon.....png'
     return most_similar_name
 
