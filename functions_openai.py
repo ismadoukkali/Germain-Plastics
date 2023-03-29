@@ -12,7 +12,7 @@ from llama_index.prompts.prompts import QuestionAnswerPrompt, RefinePrompt
 from llama_index.prompts.default_prompts import DEFAULT_TEXT_QA_PROMPT_TMPL, DEFAULT_REFINE_PROMPT_TMPL
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 
-os.environ['OPENAI_API_KEY'] = st.secrets["db_username"]
+openai.api_key = st.secrets['OPENAI_API_KEY']
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.5, model_name="gpt-4"))
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
 index = GPTSimpleVectorIndex.load_from_disk('index.json', service_context=service_context) 
@@ -72,7 +72,7 @@ class OpenAi:
                 "98cbe430acba48a790ca6bf3787317e1", "e2d83e7f1ac64e63adb6d4f6afaebc3c", 
                 "60dc4c69a75245218d2f22ba7a6dc888", "5541b477141940dfbfa1e57c323a006e"]
 
-        integration_token = 'secret_wyua0zhZ0iXsq61zHqaEfs2neQtO3zxZTaDaarT9FRs'
+        integration_token = st.secrets['NOTION']
         reader = NotionPageReader(integration_token=integration_token)
         documents = reader.load_data(page_ids=new_page_ids)
         # Save your index to a index.json file
