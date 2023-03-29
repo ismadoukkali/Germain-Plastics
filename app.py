@@ -128,7 +128,7 @@ if start and project_input:
         product_name = ids[1].split('Product: ')[-1]
         print(product_name, project_name)
         answer = bold_product(str(st.session_state.answer), product_name, project_name)
-        st.markdown(answer.split('Project: ')[0])
+        st.markdown(answer.split('**Project: ')[0])
         col1_c, col2_c, col3_c = st.columns([1,5,1])
         images = list_files_in_directory('product_images')
         product_image = find_most_similar_name(product_name, images)

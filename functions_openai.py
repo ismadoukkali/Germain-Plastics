@@ -42,7 +42,7 @@ class OpenAi:
     @staticmethod
     def retrieve_prompt(prompt: str) -> bool:     
         # try:
-        response = index.query(prompt + "Why is this product better than the rest vs.", text_qa_template=QA_PROMPT)
+        response = index.query(prompt + "Why is this product better than the others for this project? Check the 'vs.' section", text_qa_template=QA_PROMPT)
         # except Exception as e:
         return response
     
