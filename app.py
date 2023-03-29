@@ -52,7 +52,9 @@ def find_most_similar_name(text, names):
 
     if "lite" not in text or "Lite" not in text and "HDPE Liner" in text:
         most_similar_name = 'HDPE liners (Geomembranes).png' 
-    
+    elif "lite" in text or "Lite" in text and "HDPE Liner" in text:
+        most_similar_name = 'HDPE Liner Lite Pond Liner.png'
+
     if highest_score < 0.4:
         most_similar_name = 'Product coming soon.....png'
     return most_similar_name
