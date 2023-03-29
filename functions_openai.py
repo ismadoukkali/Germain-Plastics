@@ -21,7 +21,7 @@ QA_PROMPT_TMPL = (
     "\n---------------------\n"
     "Given this information, recommed a product for a user's specific project, here the user's project: '{query_str}'"
     "Make your recommendation follow this format: \n"
-    "\nFor a [project name], we recommend you look at our [full product name]. [Give a description of what the product is, in one line - make the description specific to the given project.]\n"   
+    "\nFor a [project name], we recommend you look at our [product name]. [Give a description of what the product is, in one line - make the description specific to the given project.]\n"   
     "\n[product name] can:\n"
     "\nBulleted list:"
     "- [Mention 3 benefits of this product for the specific project - it has to explain why this benefit is useful for this specific project]\n"   
@@ -30,9 +30,9 @@ QA_PROMPT_TMPL = (
     "- [Product specs]"
         
     "\nProject: [project name]"
-    "\nProduct: [full product name]'"
+    "\nProduct: [product name]'"
 
-    "Always answer in the format given above and use the full name of the product."
+    "Always answer in the format given above and use the full name of the product, do the correct differentiation between the product selected and the rest."
     "Finally, if the answer is not contained in the context, answer the following: 'I am not able to give an anwer to this search query, check further information in our website https://geosyn.com.au/ - '.\n"
 )
 QA_PROMPT = QuestionAnswerPrompt(QA_PROMPT_TMPL)
