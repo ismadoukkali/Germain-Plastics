@@ -13,7 +13,7 @@ from llama_index import StorageContext, load_index_from_storage
 import render
 
 
-os.environ['OPENAI_API_KEY'] = render.get_secrets()['OPENAI']
+os.environ['OPENAI_API_KEY'] = os.environ.get('OPENAI')
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.5, model_name="gpt-4"))
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
 storage_context = StorageContext.from_defaults(persist_dir='./storage')
