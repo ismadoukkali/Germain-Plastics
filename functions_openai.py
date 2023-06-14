@@ -11,7 +11,7 @@ from llama_index.prompts.prompts import QuestionAnswerPrompt, RefinePrompt
 from llama_index.prompts.default_prompts import DEFAULT_TEXT_QA_PROMPT_TMPL, DEFAULT_REFINE_PROMPT_TMPL
 from llama_index import StorageContext, load_index_from_storage
 
-os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI']
+os.environ['OPENAI_API_KEY'] = os.environ['OPENAI']
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.5, model_name="gpt-4"))
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
 storage_context = StorageContext.from_defaults(persist_dir='./storage')
