@@ -3,17 +3,19 @@ import logging
 import streamlit as st
 import openai
 import os
-from llama_index import LLMPredictor, GPTSimpleVectorIndex, ServiceContext
+from llama_index import LLMPredictor, ServiceContext, SimpleDirectoryReader
 from langchain.chat_models import ChatOpenAI
 from llama_index.output_parsers import LangchainOutputParser
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from llama_index.prompts.prompts import QuestionAnswerPrompt, RefinePrompt
 from llama_index.prompts.default_prompts import DEFAULT_TEXT_QA_PROMPT_TMPL, DEFAULT_REFINE_PROMPT_TMPL
+from llama_index import StorageContext, load_index_from_storage
 
 os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI']
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.5, model_name="gpt-4"))
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
-index = GPTSimpleVectorIndex.load_from_disk('index.json', service_context=service_context) 
+storage_context = StorageContext.from_defaults(persist_dir='./storage')
+index = load_index_from_storage(storage_context)
 QA_PROMPT_TMPL = (
     "We have provided context information below regarding Geosynthetics Industrial Products. \n"
     "---------------------\n"
@@ -28,7 +30,7 @@ QA_PROMPT_TMPL = (
     "\nSpecs:"
     "\nBulleted list:"
     "- [Product specs]"
-        
+    "[Make sure you include the '**']"
     "\n**Project: [project name]**"
     "\n**Product: [product name]**"
 
@@ -42,7 +44,8 @@ class OpenAi:
     @staticmethod
     def retrieve_prompt(prompt: str) -> bool:     
         # try:
-        response = index.query(prompt + "Why is this product better than the others for this project? Check the 'vs.' section", text_qa_template=QA_PROMPT)
+        query_engine = index.as_query_engine( text_qa_template=QA_PROMPT)
+        response = query_engine.query(prompt)
         # except Exception as e:
         return response
     
@@ -59,22 +62,9 @@ class OpenAi:
         fmt_refine_tmpl = output_parser.format(DEFAULT_REFINE_PROMPT_TMPL)
         qa_prompt = QuestionAnswerPrompt(fmt_qa_tmpl, output_parser=output_parser)
         refine_prompt = RefinePrompt(fmt_refine_tmpl, output_parser=output_parser)
-        response = index.query(
+        query_engine = index.as_query_engine()
+        response = query_engine.query(
             prompt, 
             text_qa_template=qa_prompt,
             refine_template=refine_prompt)
         return response
-
-    def retrieve_new_notion():
-        new_page_ids = ["02b15238fbf342f09723b558d7bf353a", "bdffb53da58e46ed84ba01c7ccb993ef", 
-                "98cbe430acba48a790ca6bf3787317e1", "e2d83e7f1ac64e63adb6d4f6afaebc3c", 
-                "60dc4c69a75245218d2f22ba7a6dc888", "5541b477141940dfbfa1e57c323a006e"]
-
-        integration_token = st.secrets['NOTION']
-        reader = NotionPageReader(integration_token=integration_token)
-        documents = reader.load_data(page_ids=new_page_ids)
-        # Save your index to a index.json file
-        # Load the index from your saved index.json file
-        index = GPTSimpleVectorIndex(documents)
-        index.save_to_disk('index.json')
-
