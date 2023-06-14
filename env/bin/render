@@ -1,0 +1,10 @@
+#!/Users/ismael.doukkali/Germain-Plastics/env/bin/python3.11
+# PBR Generated from 'console_scripts'
+
+import sys
+
+from render import run
+
+
+if __name__ == "__main__":
+    sys.exit(run())
